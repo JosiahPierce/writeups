@@ -17,6 +17,7 @@ It turns out that Thumbs.db files are created by Windows in order to quickly dis
 http://www.howtogeek.com/237091/what-are-the-thumbs.db-desktop.ini-and-.ds_store-files/
 
 I thought that perhaps there'd be a thumbnail with the flag hidden inside the Thumbs.db file, so I located a utility to extract data from it called vinetto. First, create a directory for the thumbnails to be extracted to, and then run vinetto with the following syntax (taken from the manpage):
+<br>
 `vinetto [OPTION] [-o DIR] file`
 
 So let's try that on our file. 
