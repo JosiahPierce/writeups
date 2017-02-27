@@ -23,8 +23,6 @@ The function grabs some specific strings and replaces them. When I searched the 
 
 I wrote a brief Python script to perform the reverse action of the JavaScript code and then plugged in that string. The raw code is below in really ugly formatting (and can also be found with nice formatting in a separate file in this writeup directory):
 
-import string
-
 
 user_string = str(raw_input("Enter the string: "))
 
