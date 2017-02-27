@@ -17,7 +17,7 @@ Cool, so now I've got some directories to start checking. Each page loads an ifr
 
 ![alt text](https://github.com/JosiahPierce/writeups/blob/master/images/xiomara_noflags_2.png "JavaScript code chunk")
 
-The function grabs some specific strings and replaces them. When I searched the /no_flag page for the replaced versions, I noticed that the center of the image contained a suspicious string:
+The function grabs some specific strings and replaces them. When I searched the /no_flag page for the replaced versions, I noticed that the center of the image contained a suspicious string in the center of the art:
 
 ![alt text](https://github.com/JosiahPierce/writeups/blob/master/images/xiomara_noflags_3.png "String")
 
