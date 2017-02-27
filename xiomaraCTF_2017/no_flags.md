@@ -21,9 +21,8 @@ The function grabs some specific strings and replaces them. When I searched the 
 
 ![alt text](https://github.com/JosiahPierce/writeups/blob/master/images/xiomara_noflags_3.png "String")
 
-I wrote a brief Python script to perform the reverse action of the JavaScript code and then plugged in that string. The code is below (and can also be found in a separate file in this writeup directory):
+I wrote a brief Python script to perform the reverse action of the JavaScript code and then plugged in that string. The raw code is below (and can also be found in a separate file in this writeup directory):
 
-<code>
 #! /usr/bin/python
 import string
 
@@ -44,7 +43,7 @@ if "~~@;;" in user_string:
 
 
 print user_string
-</code>
+
 
 (I removed the slashes and the /g from the beginning and end of each string because it's used for JS regular expressions, as far as I know. It made the decoded string messier if I left it in.)
 
