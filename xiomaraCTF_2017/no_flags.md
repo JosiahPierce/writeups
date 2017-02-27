@@ -21,7 +21,7 @@ The function grabs some specific strings and replaces them. When I searched the 
 
 ![alt text](https://github.com/JosiahPierce/writeups/blob/master/images/xiomara_noflags_3.png "String")
 
-I wrote a brief Python script to perform the reverse action of the JavaScript code and then plugged in that string. The raw code is below (and can also be found in a separate file in this writeup directory):
+I wrote a brief Python script to perform the reverse action of the JavaScript code and then plugged in that string. The raw code is below in really ugly formatting (and can also be found with nice formatting in a separate file in this writeup directory):
 
 import string
 
