@@ -23,7 +23,6 @@ The function grabs some specific strings and replaces them. When I searched the 
 
 I wrote a brief Python script to perform the reverse action of the JavaScript code and then plugged in that string. The raw code is below (and can also be found in a separate file in this writeup directory):
 
-#! /usr/bin/python
 import string
 
 
@@ -38,7 +37,7 @@ if "*^$#!" in user_string:
 if "*%=_()" in user_string:
     user_string = user_string.replace("*%=_()", "com")
 
-if "~~@;;" in user_string:
+if "\~~@;;" in user_string:
     user_string = user_string.replace("~~@;;", "paste")
 
 
