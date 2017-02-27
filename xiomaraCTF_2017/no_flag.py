@@ -1,4 +1,6 @@
 #! /usr/bin/python
+
+# this script is designed to reverse the JavaScript function found in the no_flag challenge
 import string
 
 
