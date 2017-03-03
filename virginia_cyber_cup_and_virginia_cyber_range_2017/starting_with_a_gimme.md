@@ -1,4 +1,4 @@
-**Note: As mentioned in the readme for this directory, if you're interested in working through the Virgina Cyber Range problems yourself, 
+**Note: As mentioned in the readme for this directory, if you're interested in working through the Virginia Cyber Range problems yourself, 
 you shouldn't use these writeups as guides unless you're REALLY stuck or have no idea what to do. Don't rob yourself of the 
 chance to learn on your own! Look at these after you've solved the problems to see if you missed anything or if there was an
 alternate solution.**
