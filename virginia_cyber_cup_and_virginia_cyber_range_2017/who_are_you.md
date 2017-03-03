@@ -1,5 +1,5 @@
 **Note: As mentioned in the readme for this directory, if you're interested in working through the Cyber Range problems yourself, 
-you may not want to use these writeups as guides unless you're REALLY stuck or have no idea what to do. Don't rob yourself of the 
+you shouldn't use these writeups as guides unless you're REALLY stuck or have no idea what to do. Don't rob yourself of the 
 chance to learn on your own!**
 
 This is a 25-point network challenge. The description reads: "Who logged in?"
