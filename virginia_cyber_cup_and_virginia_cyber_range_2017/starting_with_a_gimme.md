@@ -27,6 +27,6 @@ To begin reverse engineering the binary, I ran <code>objdump -D find_the_flag</c
 
 The "printFlag" function occurs right before main(). That's something to investigate further. Based on the run of the binary earlier, it doesn't seem that printFlag is called on a normal run. The next step is to try to jump to that function with a debugger.
 
-![alt text](https://github.com/JosiahPierce/writeups/blob/master/images/cyber_cup_starting_with_a_gimme_1.png "Debugger")
+![alt text](https://github.com/JosiahPierce/writeups/blob/master/images/cyber_cup_starting_with_a_gimme_4.png "Debugger")
 
 After setting a break point at main and running the program, it's possible to jump into the printFlag function and continue the program execution, which once again reveals the flag!
