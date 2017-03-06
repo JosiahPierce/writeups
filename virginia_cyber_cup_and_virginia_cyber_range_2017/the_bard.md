@@ -1,3 +1,5 @@
+**Note: As mentioned in the readme for this directory, if you're interested in working through the Virginia Cyber Range problems yourself, you shouldn't use these writeups as guides unless you're REALLY stuck or have no idea what to do. Don't rob yourself of the chance to learn on your own! Look at these after you've solved the problems to see if you missed anything or if there was an alternate solution.**
+
 This is a 15-point reverse engineering challenge. There's no description, just a file called 'datafile.txt'. 
 
 After downloading the file, trying to read it reveals this:
