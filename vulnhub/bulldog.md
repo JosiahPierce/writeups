@@ -174,7 +174,7 @@ Now we have some credentials to try. This seems like a good time to check out th
 
 This displays a Django administration login page. Let's try the username "sarah@bulldogindustries.com" and the password "bulldoglover".
 
-Hmm...that doesn't work. What about just the username "sarah"?
+Hmm...that doesn't work. What about the username "sarah" instead of the full email?
 
 Ah! That works. Unfortunately, the interface is pretty bare-bones.
 
