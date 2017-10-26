@@ -363,7 +363,7 @@ SUPERultimatePASSWORDyouCANTget
 
 That looks more normal. Let's try to connect via SSH again using this password.
 
-![Alt text](/images/bulldog_6.png?raw=true "ssh")
+![Alt text](/images/bulldog_16.png?raw=true "ssh")
 
 Yay, that worked! Finally, let's try to become root:
 <code>sudo su root</code>
