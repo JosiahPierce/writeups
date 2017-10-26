@@ -291,9 +291,9 @@ This command reveals that wget is present and can be found in /usr/bin/wget. Now
 http://pentestmonkey.net/tools/web-shells/perl-reverse-shell
 
 Next, this can be placed in the Apache web server directory (or a different directory if you'd like to use something like Python's SimpleHTTPServer insead). Make sure you edit the shell so that these lines reflect your IP address and desired port for catching the shell: 
-# Where to send the reverse shell.  Change these.
-my $ip = '127.0.0.1';
-my $port = 1234;
+
+my $ip = '127.0.0.1'; <br>
+my $port = 1234; <br>
 
 In my case I'll be using port 443, and my IP address is 192.168.56.102. Make sure to replace those values with the ones relevant to you if you're following along. Finally, start your web server (if you're using Apache, run this command: <code>service apache2 start</code>).
 
