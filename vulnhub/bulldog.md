@@ -199,37 +199,37 @@ Running one of the permitted shell commands returns the results of the command i
 This functionality is interesting, as sometimes commands will allow flags that spawn an interactive shell (which hopefully doesn't have the restrictions of the jail shell). Unfortunately for us, the commands we have are pretty limited, so that isn't likely to be an option in this case. However, we can still try to dig around in the file system a bit and see what information might be useful for obtaining a more fully-functional shell.
 
 Issuing the command <code>cat /etc/passwd</code> outputs all the system users:
-root:x:0:0:root:/root:/bin/bash
-daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-bin:x:2:2:bin:/bin:/usr/sbin/nologin
-sys:x:3:3:sys:/dev:/usr/sbin/nologin
-sync:x:4:65534:sync:/bin:/bin/sync
-games:x:5:60:games:/usr/games:/usr/sbin/nologin
-man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
-lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
-mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
-news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
-uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
-proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
-www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
-backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
-list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
-irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
-gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
-nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
-systemd-timesync:x:100:102:systemd Time Synchronization,,,:/run/systemd:/bin/false
-systemd-network:x:101:103:systemd Network Management,,,:/run/systemd/netif:/bin/false
-systemd-resolve:x:102:104:systemd Resolver,,,:/run/systemd/resolve:/bin/false
-systemd-bus-proxy:x:103:105:systemd Bus Proxy,,,:/run/systemd:/bin/false
-syslog:x:104:108::/home/syslog:/bin/false
-_apt:x:105:65534::/nonexistent:/bin/false
-lxd:x:106:65534::/var/lib/lxd/:/bin/false
-messagebus:x:107:111::/var/run/dbus:/bin/false
-uuidd:x:108:112::/run/uuidd:/bin/false
-dnsmasq:x:109:65534:dnsmasq,,,:/var/lib/misc:/bin/false
-bulldogadmin:x:1000:1000:bulldogadmin,,,:/home/bulldogadmin:/bin/bash
-django:x:1001:1001:,,,:/home/django:/bin/bash
-sshd:x:110:65534::/var/run/sshd:/usr/sbin/nologin
+root:x:0:0:root:/root:/bin/bash <br>
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin <br>
+bin:x:2:2:bin:/bin:/usr/sbin/nologin <br>
+sys:x:3:3:sys:/dev:/usr/sbin/nologin <br>
+sync:x:4:65534:sync:/bin:/bin/sync <br>
+games:x:5:60:games:/usr/games:/usr/sbin/nologin <br>
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin <br>
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin <br>
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin <br>
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin <br>
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin <br>
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin <br>
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin <br>
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin <br>
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin <br>
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin <br>
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin <br>
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin <br>
+systemd-timesync:x:100:102:systemd Time Synchronization,,,:/run/systemd:/bin/false <br>
+systemd-network:x:101:103:systemd Network Management,,,:/run/systemd/netif:/bin/false <br>
+systemd-resolve:x:102:104:systemd Resolver,,,:/run/systemd/resolve:/bin/false <br>
+systemd-bus-proxy:x:103:105:systemd Bus Proxy,,,:/run/systemd:/bin/false <br>
+syslog:x:104:108::/home/syslog:/bin/false <br>
+_apt:x:105:65534::/nonexistent:/bin/false <br>
+lxd:x:106:65534::/var/lib/lxd/:/bin/false <br>
+messagebus:x:107:111::/var/run/dbus:/bin/false <br>
+uuidd:x:108:112::/run/uuidd:/bin/false <br>
+dnsmasq:x:109:65534:dnsmasq,,,:/var/lib/misc:/bin/false <br>
+bulldogadmin:x:1000:1000:bulldogadmin,,,:/home/bulldogadmin:/bin/bash <br>
+django:x:1001:1001:,,,:/home/django:/bin/bash <br>
+sshd:x:110:65534::/var/run/sshd:/usr/sbin/nologin <br>
 
 
 The user "bulldogadmin" has a home dir and bash login shell, so it's worth adding that username to the list. Perhaps it'll be possible to brute-force the SSH service with this username and exploit a weak password. To test the permissions of the web shell user, let's try issuing the command <code>cat /etc/shadow</code>.
