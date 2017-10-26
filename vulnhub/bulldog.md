@@ -149,15 +149,15 @@ Aside from info about the platform, there's also a set of email addresses that c
 
 While I was working on this machine, I wasted a chunk of time on other things without fully investing the rest of the /dev page. If you view the HTML source, you'll find this helpful comment:
 <blockquote>
-<!--Need these password hashes for testing. Django's default is too complex-->
-	<!--We'll remove these in prod. It's not like a hacker can do anything with a hash-->
-	Team Lead: alan@bulldogindustries.com<br><!--6515229daf8dbdc8b89fed2e60f107433da5f2cb-->
-	Back-up Team Lead: william@bulldogindustries.com<br><br><!--38882f3b81f8f2bc47d9f3119155b05f954892fb-->
-	Front End: malik@bulldogindustries.com<br><!--c6f7e34d5d08ba4a40dd5627508ccb55b425e279-->
-	Front End: kevin@bulldogindustries.com<br><br><!--0e6ae9fe8af1cd4192865ac97ebf6bda414218a9-->
-	Back End: ashley@bulldogindustries.com<br><!--553d917a396414ab99785694afd51df3a8a8a3e0-->
-	Back End: nick@bulldogindustries.com<br><br><!--ddf45997a7e18a25ad5f5cf222da64814dd060d5-->
-	Database: sarah@bulldogindustries.com<br><!--d8b8dd5e7f000b8dea26ef8428caf38c04466b3e-->
+Need these password hashes for testing. Django's default is too complex
+We'll remove these in prod. It's not like a hacker can do anything with a hash
+	Team Lead: alan@bulldogindustries.com<br> 6515229daf8dbdc8b89fed2e60f107433da5f2cb
+	Back-up Team Lead: william@bulldogindustries.com<br><br> 38882f3b81f8f2bc47d9f3119155b05f954892fb
+	Front End: malik@bulldogindustries.com<br> c6f7e34d5d08ba4a40dd5627508ccb55b425e279
+	Front End: kevin@bulldogindustries.com<br><br> 0e6ae9fe8af1cd4192865ac97ebf6bda414218a9
+	Back End: ashley@bulldogindustries.com<br> 553d917a396414ab99785694afd51df3a8a8a3e0
+	Back End: nick@bulldogindustries.com<br><br> ddf45997a7e18a25ad5f5cf222da64814dd060d5
+	Database: sarah@bulldogindustries.com<br> d8b8dd5e7f000b8dea26ef8428caf38c04466b3e
 </blockquote>
 
 There's a handy list of SHA-1 hashes for every user! I should've picked up on this right away, but because I didn't have a well-defined enough process, I forgot the step of always checking out the source code of a page. Make sure this is something you do in order to avoid my mistake.
