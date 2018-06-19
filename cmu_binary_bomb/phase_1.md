@@ -98,19 +98,19 @@ pdf
 We've now got a nice view of the assembly code that makes up the main() function. One helpful feature of r2 is that it draws arrows to indicate exactly where various jump instructions end up, which makes the code easier to follow. It'll also show strings that are being used and sometimes convert values being used in comparisons and such. Take some time to read over the assembly and get a feel for it. Even if you haven't looked at much assembly before, the names of the functions called should give you an idea of what's going on. I won't replicate all the assembly here, but consider this chunk:
 
 <blockquote>
-|     ``--> 0x08048a30      e82b070000     call sym.initialize_bomb  
-|           0x08048a35      83c4f4         add esp, -0xc  
-|           0x08048a38      6860960408     push str.Welcome_to_my_fiendish_little_bomb._You_have_6_phases_with_n ;   str.Welcome_to_my_fiendish_little_bomb._You_have_6_phases_with_n ; "Welcome to my fiendish little bomb. You have 6 phases with."   @ 0x8049660 ; size_t nbyte  
-|           0x08048a3d      e8cefdffff     call sym.imp.printf        ; int printf(const char *format);  
-|           0x08048a42      83c4f4         add esp, -0xc  
-|           0x08048a45      68a0960408     push str.which_to_blow_yourself_up._Have_a_nice_day__n ;   str.which_to_blow_yourself_up._Have_a_nice_day__n ; "which to blow yourself up. Have a nice day!." @ 0x80496a0 ; int fildes  
-|           0x08048a4a      e8c1fdffff     call sym.imp.printf        ; int printf(const char *format);  
-|           0x08048a4f      83c420         add esp, 0x20  
-|           0x08048a52      e8a5070000     call sym.read_line         ; ssize_t read(int fildes, void *buf, size_t nbyte);  
-|           0x08048a57      83c4f4         add esp, -0xc  
-|           0x08048a5a      50             push eax                    ; size_t nbyte  
-|           0x08048a5b      e8c0000000     call sym.phase_1  
-|           0x08048a60      e8c70a0000     call sym.phase_defused  
+|     ``--> 0x08048a30      e82b070000     call sym.initialize_bomb  <br/>
+|           0x08048a35      83c4f4         add esp, -0xc  <br/>
+|           0x08048a38      6860960408     push str.Welcome_to_my_fiendish_little_bomb._You_have_6_phases_with_n ;  <br/> str.Welcome_to_my_fiendish_little_bomb._You_have_6_phases_with_n ; "Welcome to my fiendish little bomb. You have 6 phases with."   @ 0x8049660 ; size_t nbyte  <br/>
+|           0x08048a3d      e8cefdffff     call sym.imp.printf        ; int printf(const char *format);  <br/>
+|           0x08048a42      83c4f4         add esp, -0xc  <br/>
+|           0x08048a45      68a0960408     push str.which_to_blow_yourself_up._Have_a_nice_day__n ;  <br/> str.which_to_blow_yourself_up._Have_a_nice_day__n ; "which to blow yourself up. Have a nice day!." @ 0x80496a0 ; int fildes  <br/>
+|           0x08048a4a      e8c1fdffff     call sym.imp.printf        ; int printf(const char *format);  <br/>
+|           0x08048a4f      83c420         add esp, 0x20  <br/>
+|           0x08048a52      e8a5070000     call sym.read_line         ; ssize_t read(int fildes, void *buf, size_t nbyte);  <br/>
+|           0x08048a57      83c4f4         add esp, -0xc  <br/>
+|           0x08048a5a      50             push eax                    ; size_t nbyte  <br/>
+|           0x08048a5b      e8c0000000     call sym.phase_1  <br/>
+|           0x08048a60      e8c70a0000     call sym.phase_defused  <br/>
 </blockquote>
 
 
