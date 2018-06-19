@@ -97,7 +97,7 @@ pdf
 
 We've now got a nice view of the assembly code that makes up the main() function. One helpful feature of r2 is that it draws arrows to indicate exactly where various jump instructions end up, which makes the code easier to follow. It'll also show strings that are being used and sometimes convert values being used in comparisons and such. Take some time to read over the assembly and get a feel for it. Even if you haven't looked at much assembly before, the names of the functions called should give you an idea of what's going on. I won't replicate all the assembly here, but consider this chunk:
 
-<code>
+<blockquote>
 |     ``--> 0x08048a30      e82b070000     call sym.initialize_bomb
 |           0x08048a35      83c4f4         add esp, -0xc
 |           0x08048a38      6860960408     push str.Welcome_to_my_fiendish_little_bomb._You_have_6_phases_with_n ; str.Welcome_to_my_fiendish_little_bomb._You_have_6_phases_with_n ; "Welcome to my fiendish little bomb. You have 6 phases with." @ 0x8049660 ; size_t nbyte
@@ -111,7 +111,7 @@ We've now got a nice view of the assembly code that makes up the main() function
 |           0x08048a5a      50             push eax                    ; size_t nbyte
 |           0x08048a5b      e8c0000000     call sym.phase_1
 |           0x08048a60      e8c70a0000     call sym.phase_defused
-</code>
+</blockquote>
 
 
 We've got a call to initialize_bomb, and then the string we saw when we started the bomb gets pushed onto the stack. Then there's a call to printf(), which is probably printing that string on the stack. The same process happens a second time with a new string, and then there's a call to read_line(). Remember how the program waited for our input after printing its greeting? That's probably the function that processed our input. 
