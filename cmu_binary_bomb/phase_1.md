@@ -135,16 +135,16 @@ pdf
 
 This function isn't particularly large. After the stack prologue, these lines look most interesting:
 
-<code>
-|           0x08048b2c      68c0970408     push str.Public_speaking_is_very_easy. ; str.Public_speaking_is_very_easy. ; "Public speaking is very easy." @ 0x80497c0
-|           0x08048b31      50             push eax                    ; long double x
-|           0x08048b32      e8f9040000     call sym.strings_not_equal
-|           0x08048b37      83c410         add esp, 0x10
-|           0x08048b3a      85c0           test eax, eax
-|       ,=< 0x08048b3c      7405           je 0x8048b43
-|       |   0x08048b3e      e8b9090000     call sym.explode_bomb      ; long double expl(long double x);
-|       `-> 0x08048b43      89ec           mov esp, ebp
-</code>
+<blockquote>
+|           0x08048b2c      68c0970408     push str.Public_speaking_is_very_easy. ; str.Public_speaking_is_very_easy. ; "Public speaking is very easy." @ 0x80497c0 <br/>
+|           0x08048b31      50             push eax                    ; long double x <br/>
+|           0x08048b32      e8f9040000     call sym.strings_not_equal <br/>
+|           0x08048b37      83c410         add esp, 0x10 <br/>
+|           0x08048b3a      85c0           test eax, eax <br/>
+|       ,=< 0x08048b3c      7405           je 0x8048b43 <br/>
+|       |   0x08048b3e      e8b9090000     call sym.explode_bomb      ; long double expl(long double x); <br/>
+|       `-> 0x08048b43      89ec           mov esp, ebp <br/>
+</blockquote>
 
 
 It looks like the string "Public speaking is very easy." is pushed onto the stack, then placed in EAX on the next line. Next, a function called strings_not_equal gets called. The next interesting line is the <i>test eax, eax</i> instruction. This instruction basically is the equivalent of <i>cmp eax,0</i> and is to determine if EAX now has a zero value. If it does, a jump is taken; otherwise, the explode_bomb function is called.
