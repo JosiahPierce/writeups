@@ -270,6 +270,6 @@ Phase 1 defused. How about the next one?
 
 We did it! The defusal key for the first phase is the string "Public speaking is very easy." (without quotes). 
 
-Conclusion:
+<h3>Conclusion:</h3>
 
 The writeup for this phase could've basically been boiled down to "We see a string get pushed onto the stack and then some stuff gets compared. Let's try punching in that string and see what happens. Oh, it worked!" However, I wanted to delve a little more into the process and tools we'll be using throughout the remaining phases. The writeups for the other phases will probably be less verbose and more focused only on the salient steps to solving the challenge.
