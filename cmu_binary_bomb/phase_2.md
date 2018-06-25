@@ -150,7 +150,7 @@ EBX gets incremented, then checked to see if it's equal to 5. If not, we jump ba
 |       |   0x08048b7e      39049e         cmp dword [esi + ebx*4], eax ; [0x13:4]=256<br>
 |      ,==< 0x08048b81      7405           je 0x8048b88<br>
 
-So this looks like a loop, doesn't it? Keep repeating the same set of instructions, checking something each time, until a specific condition is met, then stop and continue on with execution. From this, we can deduce that <i>the program is going to keep checking each number we provided in our input, one at a time, until it's read them all<i>. But how do we figure out what the other numbers should be?
+So this looks like a loop, doesn't it? Keep repeating the same set of instructions, checking something each time, until a specific condition is met, then stop and continue on with execution. From this, we can deduce that <i>the program is going to keep checking each number we provided in our input, one at a time, until it's read them all</i>. But how do we figure out what the other numbers should be?
 
 Remember how we checked out the register values in this comparison?
 0x8048b7e <phase_2+54>:	cmp    DWORD PTR [esi+ebx*4],eax
