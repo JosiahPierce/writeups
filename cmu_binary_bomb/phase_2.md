@@ -121,7 +121,7 @@ We're coming to an interesting chunk of instructions:
 |      ,==< 0x08048b81      7405           je 0x8048b88<br>
 |      ||   0x08048b83      e874090000     call sym.explode_bomb      ; long double expl(long double x);<br>
 
-In particular, that <i>cmp<i> instruction looks important; it looks like we'll want eax to be equal to the expression on the left side of the comparison. Let's just single step until we reach that instruction.
+In particular, that <i>cmp</i> instruction looks important; it looks like we'll want eax to be equal to the expression on the left side of the comparison. Let's just single step until we reach that instruction.
 
 ![Alt text](/images/phase2_4.png?raw=true "CMP instruction")
 
