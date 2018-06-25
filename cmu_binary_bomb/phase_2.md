@@ -77,7 +77,7 @@ After entering this, GDB should hit the breakpoint we've set. We're not really i
 
 <code>diassemble phase_2</code>
 
-![Alt text](/images/phase2_3.png?raw=true "GDB disassembly")
+![Alt text](/images/phase2_4.png?raw=true "GDB disassembly")
 
 We're interested in everything from this instruction onward:
 0x08048b60 <+24>
@@ -123,7 +123,7 @@ We're coming to an interesting chunk of instructions:
 
 In particular, that <i>cmp</i> instruction looks important; it looks like we'll want eax to be equal to the expression on the left side of the comparison. Let's just single step until we reach that instruction.
 
-![Alt text](/images/phase2_4.png?raw=true "CMP instruction")
+![Alt text](/images/phase2_5.png?raw=true "CMP instruction")
 
 We can see that EAX is currently equal to 0x2. How about the other half of the comparison?
 
