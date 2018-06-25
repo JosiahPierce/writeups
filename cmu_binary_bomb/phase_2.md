@@ -139,9 +139,9 @@ That means that probably our first two input numbers were correct. Let's jot dow
 
 After the jump, notice our next few instructions:
 
-|      `--> 0x08048b88      43             inc ebx <br>
+|      --> 0x08048b88      43             inc ebx <br>
 |       |   0x08048b89      83fb05         cmp ebx, 5 <br>
-|       `=< 0x08048b8c      7ee8           jle 0x8048b76 <br>
+|       =< 0x08048b8c      7ee8           jle 0x8048b76 <br>
 
 EBX gets incremented, then checked to see if it's equal to 5. If not, we jump back to this:
 
