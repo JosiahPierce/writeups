@@ -4,45 +4,45 @@ Now that we've found the first defusal code, we can move on to solving the secon
 
 Like before, we'll start off by examining the appropriate phase function in radare2 to get a general idea of what it does. This assumes that you've already analyzed the binary with radare2, so if you haven't done that yet, you can check out the phase 1 section to learn how. To start off, let's seek to the phase_2 function and disassemble it. As a reminder, the syntax to do that is:
 
-<code>s sym.phase_2</code>
+<code>s sym.phase_2</code><br>
 <code>pdf</code>
 
 ![Alt text](/images/phase2_1.png?raw=true "Disassembled phase_2")
 
 This is still a fairly short function, but it's a bit more complex than phase_1. This chunk of assembly code is probably what's most relevant to us:
 
-|           0x08048b5b      e878040000     call sym.read_six_numbers  ; ssize_t read(int fildes, void *buf, size_t nbyte);
-|           0x08048b60      83c410         add esp, 0x10
-|           0x08048b63      837de801       cmp dword [ebp - local_18h], 1 ; [0x1:4]=0x1464c45
-|       ,=< 0x08048b67      7405           je 0x8048b6e
-|       |   0x08048b69      e88e090000     call sym.explode_bomb      ; long double expl(long double x);
-|       `-> 0x08048b6e      bb01000000     mov ebx, 1
-|           0x08048b73      8d75e8         lea esi, dword [ebp - local_18h]
-|       .-> 0x08048b76      8d4301         lea eax, dword [ebx + 1]    ; 0x1
-|       |   0x08048b79      0faf449efc     imul eax, dword [esi + ebx*4 - 4]
-|       |   0x08048b7e      39049e         cmp dword [esi + ebx*4], eax ; [0x13:4]=256
-|      ,==< 0x08048b81      7405           je 0x8048b88
-|      ||   0x08048b83      e874090000     call sym.explode_bomb      ; long double expl(long double x);
-|      `--> 0x08048b88      43             inc ebx
-|       |   0x08048b89      83fb05         cmp ebx, 5
-|       `=< 0x08048b8c      7ee8           jle 0x8048b76
+|           0x08048b5b      e878040000     call sym.read_six_numbers  ; ssize_t read(int fildes, void *buf, size_t nbyte);<br>
+|           0x08048b60      83c410         add esp, 0x10<br>
+|           0x08048b63      837de801       cmp dword [ebp - local_18h], 1 ; [0x1:4]=0x1464c45<br>
+|       ,=< 0x08048b67      7405           je 0x8048b6e<br>
+|       |   0x08048b69      e88e090000     call sym.explode_bomb      ; long double expl(long double x);<br>
+|       `-> 0x08048b6e      bb01000000     mov ebx, 1<br>
+|           0x08048b73      8d75e8         lea esi, dword [ebp - local_18h]<br>
+|       .-> 0x08048b76      8d4301         lea eax, dword [ebx + 1]    ; 0x1<br>
+|       |   0x08048b79      0faf449efc     imul eax, dword [esi + ebx*4 - 4]<br>
+|       |   0x08048b7e      39049e         cmp dword [esi + ebx*4], eax ; [0x13:4]=256<br>
+|      ,==< 0x08048b81      7405           je 0x8048b88<br>
+|      ||   0x08048b83      e874090000     call sym.explode_bomb      ; long double expl(long double x);<br>
+|      `--> 0x08048b88      43             inc ebx<br>
+|       |   0x08048b89      83fb05         cmp ebx, 5<br>
+|       `=< 0x08048b8c      7ee8           jle 0x8048b76<br>
 
 So we call a function called read_six_numbers, and then we do some comparisons. There are two different opportunities for explode_bomb to be called, and there's also a <i>jle</i> instruction that can jump back up a bit, providing more opportunities for the second occurrence of the explode_bomb function to be called. To gain a better understanding of what input is expected, let's seek to and disassemble that read_six_numbers function:
 
-<code>s sym.read_six_numbers</code>
+<code>s sym.read_six_numbers</code><br>
 <code>pdf</code>
 
 ![Alt text](/images/phase2_2.png?raw=true "Disassembled read_six_numbers")
 
 There are only a few lines here that are especially important to notice:
 
-|           0x08048ff9      681b9b0408     push str._d__d__d__d__d__d ; str._d__d__d__d__d__d ; "%d %d %d %d %d %d" @ 0x8049b1b
-|           0x08048ffe      51             push ecx                    ; long double x
-|           0x08048fff      e85cf8ffff     call sym.imp.sscanf        ; int sscanf(const char *s,
-|           0x08049004      83c420         add esp, 0x20
-|           0x08049007      83f805         cmp eax, 5
-|       ,=< 0x0804900a      7f05           jg 0x8049011
-|       |   0x0804900c      e8eb040000     call sym.explode_bomb      ; long double expl(long double x
+|           0x08048ff9      681b9b0408     push str._d__d__d__d__d__d ; str._d__d__d__d__d__d ; "%d %d %d %d %d %d" @ 0x8049b1b<br>
+|           0x08048ffe      51             push ecx                    ; long double x<br>
+|           0x08048fff      e85cf8ffff     call sym.imp.sscanf        ; int sscanf(const char *s,<br>
+|           0x08049004      83c420         add esp, 0x20<br>
+|           0x08049007      83f805         cmp eax, 5<br>
+|       ,=< 0x0804900a      7f05           jg 0x8049011<br>
+|       |   0x0804900c      e8eb040000     call sym.explode_bomb      ; long double expl(long double x<br>
 
 Most important is the instruction at 0x08048ff9. Notice what's getting pushed onto the stack? 
 
@@ -52,11 +52,11 @@ If you're familiar with format strings in C, you know that %d is the format stri
 
 The other important instruction to notice is <i>cmp eax, 5</i>. Immediately after this instruction is a <i>jg</i> (jump if greater) instruction. If that jump isn't taken, then the explode_bomb function is called. This is probably telling us that EAX (the register that stores return values of functions) needs to be greater than 5 for the read_six_numbers function to consider our input correct. If EAX were five or less, that would mean that we hadn't entered at least six numbers. This seems like a reasonable guess at what's going on. If you'd like, you can always run through this function with a debugger after entering your input for phase_2 and see if this guess is accurate.
 
-<b>Dynamic analysis<b>
+<b>Dynamic analysis</b>
 
 Now that we have some idea of what kind of input we should provide, let's check out phase_2 in GDB. We'll launch GDB, then set a breakpoint at phase_2, since we don't need to inspect the first phase anymore. 
 
-<code>gdb ./bomb</code>
+<code>gdb ./bomb</code><br>
 <code>break phase_2</code>
 
 Now we can go ahead and run the bomb, keeping our defusal code for the first phase handy:
@@ -104,7 +104,7 @@ GDB allows us to perform register arithmetic. To find out the value of EBP-0x18,
 <i>Tip: x/x is an "examine" command. The first x tells us to examine something at a specific address. After the slash, a variety of characters can be inserted; the x we chose indicates that we'd like to examine the content in hexadecimal format.<i>
 
 <code>
-gdb-peda$ x/x $ebp-0x18
+gdb-peda$ x/x $ebp-0x18<br>
 0xbffff2b0:	0x00000001
 </code>
 
@@ -113,13 +113,13 @@ So $ebp-0x18 is currently equal to 1. Let's keep stepping and see what happens. 
 
 We're coming to an interesting chunk of instructions:
 
-|       `-> 0x08048b6e      bb01000000     mov ebx, 1
-|           0x08048b73      8d75e8         lea esi, dword [ebp - local_18h]
-|       .-> 0x08048b76      8d4301         lea eax, dword [ebx + 1]    ; 0x1
-|       |   0x08048b79      0faf449efc     imul eax, dword [esi + ebx*4 - 4]
-|       |   0x08048b7e      39049e         cmp dword [esi + ebx*4], eax ; [0x13:4]=256
-|      ,==< 0x08048b81      7405           je 0x8048b88
-|      ||   0x08048b83      e874090000     call sym.explode_bomb      ; long double expl(long double x);
+|       `-> 0x08048b6e      bb01000000     mov ebx, 1<br>
+|           0x08048b73      8d75e8         lea esi, dword [ebp - local_18h]<br>
+|       .-> 0x08048b76      8d4301         lea eax, dword [ebx + 1]    ; 0x1<br>
+|       |   0x08048b79      0faf449efc     imul eax, dword [esi + ebx*4 - 4]<br>
+|       |   0x08048b7e      39049e         cmp dword [esi + ebx*4], eax ; [0x13:4]=256<br>
+|      ,==< 0x08048b81      7405           je 0x8048b88<br>
+|      ||   0x08048b83      e874090000     call sym.explode_bomb      ; long double expl(long double x);<br>
 
 In particular, that <i>cmp<i> instruction looks important; it looks like we'll want eax to be equal to the expression on the left side of the comparison. Let's just single step until we reach that instruction.
 
@@ -128,7 +128,7 @@ In particular, that <i>cmp<i> instruction looks important; it looks like we'll w
 We can see that EAX is currently equal to 0x2. How about the other half of the comparison?
 
 <code>
-gdb-peda$ x/x $esi+$ebx*4
+gdb-peda$ x/x $esi+$ebx*4<br>
 0xbffff2b4:	0x00000002
 </code>
 
@@ -139,16 +139,16 @@ That means that probably our first two input numbers were correct. Let's jot dow
 
 After the jump, notice our next few instructions:
 
-|      `--> 0x08048b88      43             inc ebx
-|       |   0x08048b89      83fb05         cmp ebx, 5
-|       `=< 0x08048b8c      7ee8           jle 0x8048b76
+|      `--> 0x08048b88      43             inc ebx<br>
+|       |   0x08048b89      83fb05         cmp ebx, 5<br>
+|       `=< 0x08048b8c      7ee8           jle 0x8048b76<br>
 
 EBX gets incremented, then checked to see if it's equal to 5. If not, we jump back to this:
 
-|       .-> 0x08048b76      8d4301         lea eax, dword [ebx + 1]    ; 0x1
-|       |   0x08048b79      0faf449efc     imul eax, dword [esi + ebx*4 - 4]
-|       |   0x08048b7e      39049e         cmp dword [esi + ebx*4], eax ; [0x13:4]=256
-|      ,==< 0x08048b81      7405           je 0x8048b88
+|       .-> 0x08048b76      8d4301         lea eax, dword [ebx + 1]    ; 0x1<br>
+|       |   0x08048b79      0faf449efc     imul eax, dword [esi + ebx*4 - 4]<br>
+|       |   0x08048b7e      39049e         cmp dword [esi + ebx*4], eax ; [0x13:4]=256<br>
+|      ,==< 0x08048b81      7405           je 0x8048b88<br>
 
 So this looks like a loop, doesn't it? Keep repeating the same set of instructions, checking something each time, until a specific condition is met, then stop and continue on with execution. From this, we can deduce that <i>the program is going to keep checking each number we provided in our input, one at a time, until it's read them all<i>. But how do we figure out what the other numbers should be?
 
@@ -158,7 +158,7 @@ Remember how we checked out the register values in this comparison?
 That will disclose the value of each expected piece of input. To see this for yourself, single step until you reach that comparison for the second time. Now, inspect the values in those registers:
 
 <code>
-gdb-peda$ x/x $esi+$ebx*4
+gdb-peda$ x/x $esi+$ebx*4<br>
 0xbffff2b8:	0x00000003
 
 gdb-peda$ x/x $eax
