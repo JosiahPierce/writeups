@@ -16,16 +16,16 @@ This is still a fairly short function, but it's a bit more complex than phase_1.
 |           0x08048b63      837de801       cmp dword [ebp - local_18h], 1 ; [0x1:4]=0x1464c45<br>
 |       ,=< 0x08048b67      7405           je 0x8048b6e<br>
 |       |   0x08048b69      e88e090000     call sym.explode_bomb      ; long double expl(long double x);<br>
-|       `-> 0x08048b6e      bb01000000     mov ebx, 1<br>
+|       -> 0x08048b6e      bb01000000     mov ebx, 1<br>
 |           0x08048b73      8d75e8         lea esi, dword [ebp - local_18h]<br>
 |       .-> 0x08048b76      8d4301         lea eax, dword [ebx + 1]    ; 0x1<br>
 |       |   0x08048b79      0faf449efc     imul eax, dword [esi + ebx*4 - 4]<br>
 |       |   0x08048b7e      39049e         cmp dword [esi + ebx*4], eax ; [0x13:4]=256<br>
 |      ,==< 0x08048b81      7405           je 0x8048b88<br>
 |      ||   0x08048b83      e874090000     call sym.explode_bomb      ; long double expl(long double x);<br>
-|      `--> 0x08048b88      43             inc ebx<br>
+|      --> 0x08048b88      43             inc ebx<br>
 |       |   0x08048b89      83fb05         cmp ebx, 5<br>
-|       `=< 0x08048b8c      7ee8           jle 0x8048b76<br>
+|       =< 0x08048b8c      7ee8           jle 0x8048b76<br>
 
 So we call a function called read_six_numbers, and then we do some comparisons. There are two different opportunities for explode_bomb to be called, and there's also a <i>jle</i> instruction that can jump back up a bit, providing more opportunities for the second occurrence of the explode_bomb function to be called. To gain a better understanding of what input is expected, let's seek to and disassemble that read_six_numbers function:
 
