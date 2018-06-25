@@ -101,7 +101,7 @@ GDB allows us to perform register arithmetic. To find out the value of EBP-0x18,
 
 <code>x/x $ebp-0x18</code>
 
-<i>Tip: x/x is an "examine" command. The first x tells us to examine something at a specific address. After the slash, a variety of characters can be inserted; the x we chose indicates that we'd like to examine the content in hexadecimal format.<i>
+<i>Tip: x/x is an "examine" command. The first x tells us to examine something at a specific address. After the slash, a variety of characters can be inserted; the x we chose indicates that we'd like to examine the content in hexadecimal format.</i>
 
 <code>
 gdb-peda$ x/x $ebp-0x18<br>
