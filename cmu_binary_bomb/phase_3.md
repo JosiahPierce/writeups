@@ -7,7 +7,7 @@ Time to move on to phase 3. As a reminder, these are the defusal codes for phase
 You know the drill by now; let's first begin by taking a look at the disassembled phase_3 function. Go ahead and seek to phase_3 and print the disassembled function.
 
 <code>
-s sym.phase_3 <br/>  
+s sym.phase_3 <br/><br/>  
 pdf <br/>  
 </code>
 
