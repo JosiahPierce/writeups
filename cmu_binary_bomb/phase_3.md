@@ -29,18 +29,31 @@ After that, this small chunk of assembly makes up the remaining interesting port
 
 <code>
            0x08048bbf      83f802         cmp eax, 2 <br/>
-       ,=< 0x08048bc2      7f05           jg 0x8048bc9 <br/>
+           
+       =< 0x08048bc2      7f05           jg 0x8048bc9 <br/>
+       
        |   0x08048bc4      e833090000     call sym.explode_bomb      ; long double expl(long double x); <br/>
-       `-> 0x08048bc9      837df407       cmp dword [ebp - local_ch], 7 ; [0x7:4]=0 <br/>
-       ,=< 0x08048bcd      0f87b5000000   ja 0x8048c88 <br/>
+       
+       -> 0x08048bc9      837df407       cmp dword [ebp - local_ch], 7 ; [0x7:4]=0 <br/>
+       
+       =< 0x08048bcd      0f87b5000000   ja 0x8048c88 <br/>
+       
        |   0x08048bd3      8b45f4         mov eax, dword [ebp - local_ch] <br/>
+       
        |   0x08048bd6      ff2485e89704.  jmp dword [eax*4 + 0x80497e8] <br/>
+       
         |   0x08048bdd      8d7600         lea esi, dword [esi] <br/>
+        
         |   ; UNKNOWN XREF from 0x080497e8 (unk) <br/>
+        
         |   0x08048be0      b371           mov bl, 0x71                ; 'q' <br/>
+        
         |   0x08048be2      817dfc090300.  cmp dword [ebp - 4], 0x309  ; [0x309:4]=0x21000000 <br/>
-       ,==< 0x08048be9      0f84a0000000   je 0x8048c8f                ; sym.phase_3+0xf7 <br/>
+        
+       ==< 0x08048be9      0f84a0000000   je 0x8048c8f                ; sym.phase_3+0xf7 <br/>
+       
        |   0x08048bef      e808090000     call sym.explode_bomb      ; long double expl(long double x); <br/>
+       
 </code>
 
 A high-level overview is that a <i>cmp eax, 2</i> instruction occurs, and then a <i>jg</i> (jump if greater) instruction immediately follows it. If the jump fails, the explode_bomb function is called. If it succeeds, then we'll have a <i>cmp dword [ebp - local_ch], 7</i> instruction. This is immediately followed by a <i>ja</i> (jump if above) instruction. It looks like that jump will take us out of the function altogether if it happens, which is odd. It may be that there's more we'd see if we ran this program in a debugger. Since we've already gotten a reasonable amount of information, let's move on to dynamic analysis and play around with our input some.
