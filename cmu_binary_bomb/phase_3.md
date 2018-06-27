@@ -29,30 +29,18 @@ After that, this small chunk of assembly makes up the remaining interesting port
 
 <code>
            0x08048bbf      83f802         cmp eax, 2 <br/>
-           
-       =< 0x08048bc2      7f05           jg 0x8048bc9 <br/>
-       
-       |   0x08048bc4      e833090000     call sym.explode_bomb      ; long double expl(long double x); <br/>
-       
-       -> 0x08048bc9      837df407       cmp dword [ebp - local_ch], 7 ; [0x7:4]=0 <br/>
-       
-       =< 0x08048bcd      0f87b5000000   ja 0x8048c88 <br/>
-       
-       |   0x08048bd3      8b45f4         mov eax, dword [ebp - local_ch] <br/>
-       
-       |   0x08048bd6      ff2485e89704.  jmp dword [eax*4 + 0x80497e8] <br/>
-       
-        |   0x08048bdd      8d7600         lea esi, dword [esi] <br/>
-        
-        |   ; UNKNOWN XREF from 0x080497e8 (unk) <br/>
-        
-        |   0x08048be0      b371           mov bl, 0x71                ; 'q' <br/>
-        
-        |   0x08048be2      817dfc090300.  cmp dword [ebp - 4], 0x309  ; [0x309:4]=0x21000000 <br/>
-        
-       ==< 0x08048be9      0f84a0000000   je 0x8048c8f                ; sym.phase_3+0xf7 <br/>
-       
-       |   0x08048bef      e808090000     call sym.explode_bomb      ; long double expl(long double x); <br/>
+           =< 0x08048bc2      7f05           jg 0x8048bc9 <br/>
+           |   0x08048bc4      e833090000     call sym.explode_bomb      ; long double expl(long double x); <br/>
+           -> 0x08048bc9      837df407       cmp dword [ebp - local_ch], 7 ; [0x7:4]=0 <br/>
+           =< 0x08048bcd      0f87b5000000   ja 0x8048c88 <br/>
+           |   0x08048bd3      8b45f4         mov eax, dword [ebp - local_ch] <br/>
+           |   0x08048bd6      ff2485e89704.  jmp dword [eax*4 + 0x80497e8] <br/>
+           |   0x08048bdd      8d7600         lea esi, dword [esi] <br/>
+           |   ; UNKNOWN XREF from 0x080497e8 (unk) <br/>
+           |   0x08048be0      b371           mov bl, 0x71                ; 'q' <br/>
+           |   0x08048be2      817dfc090300.  cmp dword [ebp - 4], 0x309  ; [0x309:4]=0x21000000 <br/>
+           ==< 0x08048be9      0f84a0000000   je 0x8048c8f                ; sym.phase_3+0xf7 <br/>
+           |   0x08048bef      e808090000     call sym.explode_bomb      ; long double expl(long double x); <br/>
        
 </code>
 
