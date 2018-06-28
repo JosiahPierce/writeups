@@ -4,7 +4,7 @@ Time to move on to phase 3. As a reminder, these are the defusal codes for phase
 
 <b>Static analysis</b>
 
-You know the drill by now; let's first begin by taking a look at the disassembled phase_3 function. Go ahead and seek to phase_3 and print the disassembled function.
+You know the drill by now; let's first begin by taking a look at the disassembled phase_3 function. Go ahead and fire up radare2, then seek to phase_3 and print the disassembled function.
 
 <code>
 s sym.phase_3 <br/><br/>  
