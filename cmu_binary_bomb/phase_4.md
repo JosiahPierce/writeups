@@ -11,7 +11,9 @@ Just like always, seek to the phase_4 function in radare2 and disassemble it.
 
 <code>
 s sym.phase_4  <br/>
+ 
 pdf <br/>
+
 </code>
 
 ![Alt text](/images/phase4_1.png?raw=true "Disassembled phase_4")
@@ -39,8 +41,11 @@ When you're ready to leave this graph and go back to your prompt, you can double
 The final important aspect of this function for us to notice is this chunk of instructions:  <br/>  
 <code>
 0x08048d1d      83f837         cmp eax, 0x37               ; '7' ; '7'  <br/>
+ 
 0x08048d20      7405           je 0x8048d27  <br/>  
+
 0x08048d22      e8d5070000     call sym.explode_bomb      ; long double expl(long double x);  <br/>  
+
 </code>
 
 These are the last instructions before the stack epilogue takes place. Looks like that <i>cmp eax,0x37</i> instruction is responsible for determining whether the explode_bomb function gets jumped over or not. If that comparison doesn't return equal, then the bomb explodes. 0x37 is 55 in decimal, in case that becomes relevant later.
@@ -50,7 +55,9 @@ Next, let's go ahead and take a look at that func4 function:  <br/>
 
 <code>
 s sym.func4  <br/>  
+ 
 pdf  <br/>  
+
 </code>
 
 ![Alt text](/images/phase4_3.png?raw=true "Disassembled func4")
@@ -64,22 +71,34 @@ Go ahead and open the bomb in GDB, setting a breakpoint at phase_4:  <br/>
 
 <code>
 gdb ./bomb  <br/>  
+ 
 break phase_4  <br/>  
+
 </code>
 
 Now go ahead and start running the binary, providing the first three defusal codes:  <br/>  
 
 <code>
 gdb-peda$ r  <br/>  
+ 
 Starting program: /home/reverse/reversing/binary_bomb/bomb   <br/>  
+
 Welcome to my fiendish little bomb. You have 6 phases with  <br/>  
+
 which to blow yourself up. Have a nice day!  <br/>  
+
 Public speaking is very easy.  <br/>  
+
 Phase 1 defused. How about the next one?  <br/>  
+
 1 2 6 24 120 720  <br/>  
+
 That's number 2.  Keep going!  <br/>  
+
 7 b 524  <br/>  
+
 Halfway there!  <br/>  
+
 </code>
 
 For phase 4, we know we need to submit a single integer. Let's try 5. After entering that, you should hit the breakpoint at phase_4.
@@ -88,15 +107,20 @@ What's our plan of attack for this one? We saw that func4 is recursive, which co
 
 <code>
    0x08048d1d <+61>:	cmp    eax,0x37  <br/>  
+ 
    0x08048d20 <+64>:	je     0x8048d27 <phase_4+71>  <br/>  
+   
    0x08048d22 <+66>:	call   0x80494fc <explode_bomb>  <br/>  
+   
 </code>
 
 Since EAX is being compared with a fixed value, and this is at the end of the function, we might be able to figure out if the func4 function is mutating our input in some way by just setting a breakpoint at that comparison (phase_4+61) and then trying different inputs to see what ends up in EAX. This way, we circumvent having to do so much analysis of func4 itself. 
 
 <code>
 gdb-peda$ break *phase_4+61  <br/>  
+ 
 Breakpoint 2 at 0x8048d1d  <br/>  
+
 </code>
 
 Now go ahead and continue execution, which should bring you to the breakpoint you just set. 
