@@ -28,12 +28,12 @@ So some odd string is being placed in the ESI register, followed by some instruc
 
 Lastly, there's this whole chunk:  <br/>
 <code>
-|           0x08048d72      680b980408     push str.giants ; str.giants ; "giants" @ 0x804980b  <br/>
-|           0x08048d77      8d45f8         lea eax, dword [ebp - local_8h]  <br/>
-|           0x08048d7a      50             push eax                    ; long double x  <br/>
-|           0x08048d7b      e8b0020000     call sym.strings_not_equal  <br/>
-|           0x08048d80      83c410         add esp, 0x10  <br/>
-|           0x08048d83      85c0           test eax, eax  <br/>
+0x08048d72      680b980408     push str.giants ; str.giants ; "giants" @ 0x804980b  <br/>
+0x08048d77      8d45f8         lea eax, dword [ebp - local_8h]  <br/>
+0x08048d7a      50             push eax                    ; long double x  <br/>
+0x08048d7b      e8b0020000     call sym.strings_not_equal  <br/>
+0x08048d80      83c410         add esp, 0x10  <br/>
+0x08048d83      85c0           test eax, eax  <br/>
 </code>
 
 So the string "giants" is pushed onto the stack, and then a function called strings_not_equal is called. After that, there's a <i>test eax,eax</i> instruction. Right after this chunk there's a <i>je</i> instruction; if it's taken, then a second explode_bomb call is circumvented, and the phase_5 function should return successfully. If it's not taken, then the bomb will explode. At a guess, perhaps user input is being compared against the string "giants" by calling the strings_not_equal function? The results are then placed in EAX, and if EAX is 0 (don't forget that <i>test eax,eax</i> is equivalent to <i>cmp eax,0</i>, then the <i>je</i> will be taken. EAX is probably set to 0 if the strings compared are equal, then, and it's probably set to 1 if they aren't.
