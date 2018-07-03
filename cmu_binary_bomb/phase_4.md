@@ -11,7 +11,6 @@ Just like always, seek to the phase_4 function in radare2 and disassemble it.
 
 <code>
 s sym.phase_4  <br/>
- 
 pdf <br/>
 
 </code>
