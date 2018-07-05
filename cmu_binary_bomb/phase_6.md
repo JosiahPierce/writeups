@@ -146,12 +146,12 @@ First, we see that EAX is currently equal to 0xfd. We didn't see that value befo
 What can we deduce from this? Well, it looks like each of our integers we provided as input is converted to a specific hex value. When we reach this comparison stage, the value in EAX (which contains the converted value of the integer we provided) needs to be <i>larger</i> than the value in EDX, which seems to be the converted value of the <i>next</i> integer we provided. This means that none of our integers can be repeat numbers, and our input needs to make them appear in order from greatest converted value to least converted value. Let's go back to our chart, and let's try to figure out which numbers we provided correspond to which converted values:
 
 Input:  Converted:  Decimal:  <br>
-1		0xfd		253
-2		0x2d5	725
-3		0x12d	301
-4		0x3e5	997
-5		0xd4	212
-6		0x1b0	432
+1		0xfd		253<br>
+2		0x2d5	725<br>
+3		0x12d	301<br>
+4		0x3e5	997<br>
+5		0xd4	212<br>
+6		0x1b0	432<br>
 
 We can guess that 0xfd corresponds to 1, because it's the very first value in EAX during this final comparison stage. If we're right, then each of the other values we saw should correspond to our remaining five integers in the order they appeared. What's our greatest-to-least converted value order look like?
 
