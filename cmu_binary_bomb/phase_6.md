@@ -182,5 +182,5 @@ Congratulations! You've defused the bomb!<br>
 
 That's it! We've finally defused the bomb. I tried to keep this phase's writeup focused almost entirely on the steps that actually work for finding the solution; when I originally did this, I spent quite a while with trial-and-error, eventually noticing the pattern with the converted number values.
 
-We're now officially done with all of the main phases of the bomb, but we're actually not done with the bomb itself. It just so happens that there's a secret phase for the bomb; it's optional, but it's fun and provides some more opporutnities for us to hone our reversing skills, so let's tackle that as well. We'll check it out in the next section.
+We're now officially done with all of the main phases of the bomb, but we're actually not done with the bomb itself. It just so happens that there's a secret phase for the bomb; it's optional, but it's fun and provides some more opportunities for us to hone our reversing skills, so let's tackle that as well. We'll check it out in the next section.
 
