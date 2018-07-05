@@ -24,14 +24,19 @@ Wow! This phase contains a lot more instructions than anything we've looked at p
 0x08048db3      e820020000     call sym.read_six_numbers  ; ssize_t read(int fildes, void *buf, size_t nbyte);
 </code>
 
+
 As a reminder, we've seen this read_six_numbers function before in a previous phase. This function expects six integers separated by spaces. That's what our input should be for this phase. What else can we analyze? This chunk is interesting:<br>
 
 <code>
 0x08048dc6      48             dec eax<br>
+  
 0x08048dc7      83f805         cmp eax, 5<br>
+
 0x08048dca      7605           jbe 0x8048dd1<br>
+
 0x08048dcc      e82b070000     call sym.explode_bomb<br>
 </code>
+
 
 Looks like the value of EAX is being decremented (<i>dec eax</i> instruction), and then EAX is being compared to 5. Then there's a "jump if below or equal" instruction (<i>jbe 0x8048dd1</i>), and if this jump is not taken, then the explode_bomb function is called. 
 
@@ -121,11 +126,11 @@ Notice that EAX is now equal to 0x2d5. 0x2d5 converts to the decimal value 725. 
 
 As you continue and record execution, here are each of the values you should come up with and their decimal equivalents (including the two we've already seen):<br>
 
-0x2d5 -- 725
-0x12d -- 301
-0x3e5 -- 997
-0xd4 -- 212
-0x1b0 -- 432
+0x2d5 -- 725<br>
+0x12d -- 301<br>
+0x3e5 -- 997<br>
+0xd4 -- 212<br>
+0x1b0 -- 432<br>
 
 EDI should now be equal to 0x6. Go ahead and single-step once to confirm that the <i>jle</i> isn't taken this time. Then continue execution to hit the final breakpoint we set up:<br>
 
