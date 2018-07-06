@@ -7,7 +7,7 @@ Before we get started, there's the obvious question: how do we go about solving 
 
 In radare2, seek to the secret_phase function and disassemble it.
 
-![Alt text](/images/secretphase_1.png?raw=true "Disassembled secret_phase")
+![Alt text](/images/secrephase_1.png?raw=true "Disassembled secret_phase")
 
 
 First off, we notice that this phase is calling the read_line function. Normally, that function was called outside of the phase functions, but since the secret phase isn't normally called, all of the functions necessary to construct a full phase will need to be self-contained. Similarly, at the end of the secret phase, the phase_defused function is called. This is good news, since it means that when we get around to patching the binary, we won't have to patch several different function calls in to get the phase to work properly.
