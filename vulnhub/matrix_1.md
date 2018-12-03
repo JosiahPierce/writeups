@@ -190,7 +190,7 @@ This tries to log in with the username "guest" and iterates through all the poss
 We can log in with the username <b>guest</b> and the password <b>k1ll0r7n</b>.  Upon doing so, trying to issue some commands shows the following output:
 
 guest@porteus:~$ id<br>
--rbash: id: command not found<br>
+- rbash: id: command not found<br>
 guest@porteus:~$ <br>
 
 If you're not familiar with rbash, it's a restricted shell environment, designed to allow users to issue only specific commands. There are quite a few potential methods of escaping the restricted shell that administrators should be aware of, however. An excellent overview of rbash escape techniques (and techniques for escaping restricted shells in general) can be <a href="https://speakerdeck.com/knaps/escape-from-shellcatraz-breaking-out-of-restricted-unix-shells">found here</a>. 
