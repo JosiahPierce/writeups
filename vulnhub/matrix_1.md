@@ -173,32 +173,7 @@ You can enter into matrix as guest, with password k1ll0rXX
 Note: Actually, I forget last two characters so I have replaced with XX try your luck and find correct string of password.
 </i>
 
-Looks like we'll need to find some way of generating all of the possible passwords that begin with "k1ll0r" and conclude with two more characters. There's probably some super fancy way of using the Crunch wordlist generation tool to do this, but instead I spent a little while making this Python script:
-
-<code>
-#!/usr/bin/python
-
-import itertools
-import time
-
-initial_password = "k1ll0r"
-
-charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=}{[]';:?/><,."
-
-# generate all 2-byte permutations of the charset
-guesses = [''.join(i) for i in itertools.permutations(charset, 2)]
-
-# append the guesses to the password and
-# write to a file in order to create a wordlist for
-# use with hydra or other SSH brute-force tool
-print "Writing all passwords to file ssh_passwords.txt..."
-for i in guesses:
-	f = open("ssh_passwords.txt","a")
-	f.write(initial_password + i + "\n")
-	f.close()
-
-print "Done!"
-</code>
+Looks like we'll need to find some way of generating all of the possible passwords that begin with "k1ll0r" and conclude with two more characters. There's probably some super fancy way of using the Crunch wordlist generation tool to do this, but instead I spent a little while making <a href="https://github.com/JosiahPierce/writeups/blob/master/vulnhub/pw_gen.py">this Python script</a>.
 
 This code is pretty simple, but the idea is to generate all of the possible 2-character permutations based on the character set I provided and eventually prepend the known part of the password to each of the permutations. Rather than try to implement some kind of SSH brute-forcing directly in Python, I decided to just write out all of the possible passwords to a file and then use a Hydra, a brute-forcing tool, to read the wordlist I'd created. 
 
