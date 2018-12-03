@@ -38,14 +38,14 @@ Below are the results of the three scans (some slightly truncated for brevity's 
 Basic scan (<code>nmap 192.168.56.102</code>):
 <i>
 
-Nmap scan report for 192.168.56.102
-Host is up (0.00017s latency).
-Not shown: 997 closed ports
-PORT      STATE SERVICE
-22/tcp    open  ssh
-80/tcp    open  http
-31337/tcp open  Elite
-MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)
+Nmap scan report for 192.168.56.102<br>
+Host is up (0.00017s latency).<br>
+Not shown: 997 closed ports<br>
+PORT      STATE SERVICE<br>
+22/tcp    open  ssh<br>
+80/tcp    open  http<br>
+31337/tcp open  Elite<br>
+MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)<br>
 </i>
 
 Full scan (<code>nmap -A 192.168.56.102 -p-</code>):
