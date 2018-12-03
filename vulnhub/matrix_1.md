@@ -230,6 +230,7 @@ To do this, I issued these commands:
 
 I then copied the text in id_rsa.pub and pasted it into a file of the same name on the target machine in /tmp. I made it world-readable and then ran this command to copy it to trinity's authorized_keys file:
 <code>sudo -u trinity /bin/cp /tmp/id_rsa.pub /home/trinity/.ssh/authorized_keys</code>
+(If you prefer, you can also generate the keypair on the target machine and then just SCP the private key down to your attacking machine; this is the method I originally used)
 
 This ran successfully. To see if we now have access as trinity, we can run:
 <code>ssh trinity@192.168.56.102 -i id_rsa</code>
