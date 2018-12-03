@@ -96,7 +96,7 @@ Based on these results, the VM is running three TCP services: SSH, HTTP, and HTT
 
 <h3>SSH</h3>
 
-Nmap reported that this is OpenSSH 7.7. There was recently a <a href="https://www.exploit-db.com/exploits/45233">username enumeration vulnerability</a> in OpenSSH, but that only applies to versions < 7.7, so we know this machine is patched against this attack. That's a useful vulnerability to know about, though, and it's always work checking the OpenSSH version.
+Nmap reported that this is OpenSSH 7.7. There was recently a <a href="https://www.exploit-db.com/exploits/45233">username enumeration vulnerability</a> in OpenSSH, but that only applies to versions < 7.7, so we know this machine is patched against this attack. That's a useful vulnerability to know about, though, and it's always worth checking the OpenSSH version.
 
 The next enumeration step against SSH is to just try connecting. We're looking for two pieces of information:
 -Is there an SSH banner that might disclose any helpful info?
