@@ -51,41 +51,41 @@ MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)<br>
 Full scan (<code>nmap -A 192.168.56.102 -p-</code>):
 <i>
 
-Nmap scan report for 192.168.56.102
-Host is up (0.00040s latency).
-Not shown: 65532 closed ports
-PORT      STATE SERVICE VERSION
-22/tcp    open  ssh     OpenSSH 7.7 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 9c:8b:c7:7b:48:db:db:0c:4b:68:69:80:7b:12:4e:49 (RSA)
-|   256 49:6c:23:38:fb:79:cb:e0:b3:fe:b2:f4:32:a2:70:8e (ECDSA)
-|_  256 53:27:6f:04:ed:d1:e7:81:fb:00:98:54:e6:00:84:4a (ED25519)
-80/tcp    open  http    SimpleHTTPServer 0.6 (Python 2.7.14)
-|_http-server-header: SimpleHTTP/0.6 Python/2.7.14
-|_http-title: Welcome in Matrix
-31337/tcp open  http    SimpleHTTPServer 0.6 (Python 2.7.14)
-|_http-title: Welcome in Matrix
-MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)
-Device type: general purpose
-Running: Linux 3.X|4.X
-OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
-OS details: Linux 3.2 - 4.9
-Network Distance: 1 hop
+Nmap scan report for 192.168.56.102<br>
+Host is up (0.00040s latency).<br>
+Not shown: 65532 closed ports<br>
+PORT      STATE SERVICE VERSION<br>
+22/tcp    open  ssh     OpenSSH 7.7 (protocol 2.0)<br>
+| ssh-hostkey: <br>
+|   2048 9c:8b:c7:7b:48:db:db:0c:4b:68:69:80:7b:12:4e:49 (RSA)<br>
+|   256 49:6c:23:38:fb:79:cb:e0:b3:fe:b2:f4:32:a2:70:8e (ECDSA)<br>
+|_  256 53:27:6f:04:ed:d1:e7:81:fb:00:98:54:e6:00:84:4a (ED25519)<br>
+80/tcp    open  http    SimpleHTTPServer 0.6 (Python 2.7.14)<br>
+|_http-server-header: SimpleHTTP/0.6 Python/2.7.14<br>
+|_http-title: Welcome in Matrix<br>
+31337/tcp open  http    SimpleHTTPServer 0.6 (Python 2.7.14)<br>
+|_http-title: Welcome in Matrix<br>
+MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)<br>
+Device type: general purpose<br>
+Running: Linux 3.X|4.X<br>
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4<br>
+OS details: Linux 3.2 - 4.9<br>
+Network Distance: 1 hop<br>
 
-TRACEROUTE
-HOP RTT     ADDRESS
-1   0.40 ms 192.168.56.102
+TRACEROUTE<br>
+HOP RTT     ADDRESS<br>
+1   0.40 ms 192.168.56.102<br>
 </i>
 
 UDP scan (<code>nmap -sU 192.168.56.102</code>):
 <i>
 
-Nmap scan report for 192.168.56.102
-Host is up (0.00036s latency).
-Not shown: 999 closed ports
-PORT   STATE         SERVICE
-68/udp open|filtered dhcpc
-MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)
+Nmap scan report for 192.168.56.102<br>
+Host is up (0.00036s latency).<br>
+Not shown: 999 closed ports<br>
+PORT   STATE         SERVICE<br>
+68/udp open|filtered dhcpc<br>
+MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)<br>
 </i>
 
 
