@@ -208,11 +208,11 @@ This executes a command immediately upon connecting, bypassing rbash. I prefer t
 
 Now that we've successfully gained access and escaped the restricted shell, we'll want to do the typical system enumeration to search for potential privilege escalation vulnerabilities. One of the first things to check is if our current user has any sudo privileges. This can be checked by running <code>sudo -l</code> and then providing a password if prompted. In this case, the output is:
 <i>
-guest@porteus:~$ sudo -l
-User guest may run the following commands on porteus:
-    (ALL) ALL
-    (root) NOPASSWD: /usr/lib64/xfce4/session/xfsm-shutdown-helper
-    (trinity) NOPASSWD: /bin/cp
+guest@porteus:~$ sudo -l<br>
+User guest may run the following commands on porteus:<br>
+    (ALL) ALL<br>
+    (root) NOPASSWD: /usr/lib64/xfce4/session/xfsm-shutdown-helper<br>
+    (trinity) NOPASSWD: /bin/cp<br>
 
 </i>
 
@@ -239,16 +239,16 @@ This ran successfully. To see if we now have access as trinity, we can run:
 
 Our next step is to see what new permissions we have as trinity. Let's check our sudo permissions again:
 <i>
-trinity@porteus:~$ sudo -l
-User trinity may run the following commands on porteus:
-    (root) NOPASSWD: /home/trinity/oracle
+trinity@porteus:~$ sudo -l<br>
+User trinity may run the following commands on porteus:<br>
+    (root) NOPASSWD: /home/trinity/oracle<br>
 
 </i>
 
 Interestingly, the file /home/trinity/oracle doesn't appear to exist. How can we exploit this? Well, since we have write access to trinity's home directory, let's just create our own file called oracle and make it whatever we want. In my case, I made it this tiny bash script that simply spawns a new shell:
 <code>
-#!/bin/bash
-/bin/bash
+#!/bin/bash<br>
+/bin/bash<br>
 </code>
 
 I made this file executable and then ran this command to run it with root privileges:
