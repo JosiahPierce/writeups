@@ -24,15 +24,15 @@ Then there are these two instructions:<br>
 
 EAX is compared with 0x3e8, which is 1000 in decimal. If EAX is below or equal to 1000, then a jump is taken. Otherwise, explode_bomb is called. This indicates that our input will probably need to be a number that is less than or equal to 1000. This chunk of instructions found slightly later in the function also sticks out:<br>
 
-<code>
-0x08048f1d      e872ffffff     call sym.fun7<br>
+```assembly
+0x08048f1d      e872ffffff     call sym.fun7
 
-0x08048f22      83c410         add esp, 0x10<br>
+0x08048f22      83c410         add esp, 0x10
 
-0x08048f25      83f807         cmp eax, 7<br>
+0x08048f25      83f807         cmp eax, 7
 
-0x08048f28      7405           je 0x8048f2f<br>
-</code>
+0x08048f28      7405           je 0x8048f2f
+```
 
 A function called fun7 is called. 0x10 is added to ESP, and then EAX is compared with 7. If it's equal, a call to explode_bomb is circumvented, and the phase should be defused. If it's not equal to 7, then the bomb explodes. This should indicate that some kind of modification is being performed on the input we provided, probably during the fun7 function. Let's take a quick look at the fun7 function in r2 and see what stands out.
 
