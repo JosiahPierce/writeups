@@ -27,20 +27,19 @@ Next, we've got this:  <br/>
 So some odd string is being placed in the ESI register, followed by some instructions that make up most of the middle of phase_5. That might be something to investigate further. 
 
 Lastly, there's this whole chunk:  <br/>
-<code>
-0x08048d72      680b980408     push str.giants ; str.giants ; "giants" @ 0x804980b  <br/>
+```assembly
+0x08048d72      680b980408     push str.giants ; str.giants ; "giants" @ 0x804980b
    
-0x08048d77      8d45f8         lea eax, dword [ebp - local_8h]  <br/>
+0x08048d77      8d45f8         lea eax, dword [ebp - local_8h]
 
-0x08048d7a      50             push eax                    ; long double x  <br/>
+0x08048d7a      50             push eax                    ; long double x
 
-0x08048d7b      e8b0020000     call sym.strings_not_equal  <br/>
+0x08048d7b      e8b0020000     call sym.strings_not_equal
 
-0x08048d80      83c410         add esp, 0x10  <br/>
+0x08048d80      83c410         add esp, 0x10
 
-0x08048d83      85c0           test eax, eax  <br/>
-
-</code>
+0x08048d83      85c0           test eax, eax
+```
 
 So the string "giants" is pushed onto the stack, and then a function called strings_not_equal is called. After that, there's a <i>test eax,eax</i> instruction. Right after this chunk there's a <i>je</i> instruction; if it's taken, then a second explode_bomb call is circumvented, and the phase_5 function should return successfully. If it's not taken, then the bomb will explode. At a guess, perhaps user input is being compared against the string "giants" by calling the strings_not_equal function? The results are then placed in EAX, and if EAX is 0 (don't forget that <i>test eax,eax</i> is equivalent to <i>cmp eax,0</i>, then the <i>je</i> will be taken. EAX is probably set to 0 if the strings compared are equal, then, and it's probably set to 1 if they aren't.
 
@@ -112,19 +111,19 @@ Notice that EAX now contains 0x6. Our guess was correct; a 6-byte string is expe
 
 This is the beginning of the section we're most interested in. For context, here's the whole block we want to investigate:  <br/>
 
-<code>
-0x08048d4d <+33>:	xor    edx,edx  <br/>
-   0x08048d4f <+35>:	lea    ecx,[ebp-0x8]  <br/>
-   0x08048d52 <+38>:	mov    esi,0x804b220  <br/>
-   0x08048d57 <+43>:	mov    al,BYTE PTR [edx+ebx*1]  <br/>
-   0x08048d5a <+46>:	and    al,0xf  <br/>
-   0x08048d5c <+48>:	movsx  eax,al  <br/>
-   0x08048d5f <+51>:	mov    al,BYTE PTR [eax+esi*1]  <br/>
-   0x08048d62 <+54>:	mov    BYTE PTR [edx+ecx*1],al  <br/>
-   0x08048d65 <+57>:	inc    edx  <br/>
-   0x08048d66 <+58>:	cmp    edx,0x5  <br/>
-   0x08048d69 <+61>:	jle    0x8048d57 <phase_5+43>  <br/>
-</code>
+```assembly
+0x08048d4d <+33>:	xor    edx,edx
+   0x08048d4f <+35>:	lea    ecx,[ebp-0x8]
+   0x08048d52 <+38>:	mov    esi,0x804b220
+   0x08048d57 <+43>:	mov    al,BYTE PTR [edx+ebx*1]
+   0x08048d5a <+46>:	and    al,0xf
+   0x08048d5c <+48>:	movsx  eax,al
+   0x08048d5f <+51>:	mov    al,BYTE PTR [eax+esi*1]
+   0x08048d62 <+54>:	mov    BYTE PTR [edx+ecx*1],al
+   0x08048d65 <+57>:	inc    edx
+   0x08048d66 <+58>:	cmp    edx,0x5
+   0x08048d69 <+61>:	jle    0x8048d57 <phase_5+43>
+```
 
 Let's just single-step through that up to the <i>jle</i> instruction and look for anything interesting.
 
