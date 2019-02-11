@@ -38,14 +38,14 @@ This shows different blocks of code and where various jump-type instructions wil
 When you're ready to leave this graph and go back to your prompt, you can double-tap the <b>esc</b> key twice.
 
 The final important aspect of this function for us to notice is this chunk of instructions:  <br/>  
-<code>
-0x08048d1d      83f837         cmp eax, 0x37               ; '7' ; '7'  <br/>
+```assembly
+0x08048d1d      83f837         cmp eax, 0x37               ; '7' ; '7' 
  
-0x08048d20      7405           je 0x8048d27  <br/>  
+0x08048d20      7405           je 0x8048d27 
 
-0x08048d22      e8d5070000     call sym.explode_bomb      ; long double expl(long double x);  <br/>  
+0x08048d22      e8d5070000     call sym.explode_bomb      ; long double expl(long double x);
 
-</code>
+```
 
 These are the last instructions before the stack epilogue takes place. Looks like that <i>cmp eax,0x37</i> instruction is responsible for determining whether the explode_bomb function gets jumped over or not. If that comparison doesn't return equal, then the bomb explodes. 0x37 is 55 in decimal, in case that becomes relevant later.
 
@@ -104,14 +104,14 @@ For phase 4, we know we need to submit a single integer. Let's try 5. After ente
 
 What's our plan of attack for this one? We saw that func4 is recursive, which could make it tricky to analyze. We might still need to, but first, let's try another technique. Remeber that these three instructions near the end of the phase_4 function seemed critical:  <br/>  
 
-<code>
-   0x08048d1d <+61>:	cmp    eax,0x37  <br/>  
+```assembly
+   0x08048d1d <+61>:	cmp    eax,0x37
  
-   0x08048d20 <+64>:	je     0x8048d27 <phase_4+71>  <br/>  
+   0x08048d20 <+64>:	je     0x8048d27 <phase_4+71>
    
-   0x08048d22 <+66>:	call   0x80494fc <explode_bomb>  <br/>  
+   0x08048d22 <+66>:	call   0x80494fc <explode_bomb>
    
-</code>
+```
 
 Since EAX is being compared with a fixed value, and this is at the end of the function, we might be able to figure out if the func4 function is mutating our input in some way by just setting a breakpoint at that comparison (phase_4+61) and then trying different inputs to see what ends up in EAX. This way, we circumvent having to do so much analysis of func4 itself. 
 
