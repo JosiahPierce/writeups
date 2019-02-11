@@ -27,15 +27,15 @@ Wow! This phase contains a lot more instructions than anything we've looked at p
 
 As a reminder, we've seen this read_six_numbers function before in a previous phase. This function expects six integers separated by spaces. That's what our input should be for this phase. What else can we analyze? This chunk is interesting:<br>
 
-<code>
-0x08048dc6      48             dec eax<br>
+```assembly
+0x08048dc6      48             dec eax
   
-0x08048dc7      83f805         cmp eax, 5<br>
+0x08048dc7      83f805         cmp eax, 5
 
-0x08048dca      7605           jbe 0x8048dd1<br>
+0x08048dca      7605           jbe 0x8048dd1
 
-0x08048dcc      e82b070000     call sym.explode_bomb<br>
-</code>
+0x08048dcc      e82b070000     call sym.explode_bomb
+```
 
 
 Looks like the value of EAX is being decremented (<i>dec eax</i> instruction), and then EAX is being compared to 5. Then there's a "jump if below or equal" instruction (<i>jbe 0x8048dd1</i>), and if this jump is not taken, then the explode_bomb function is called. 
