@@ -2,7 +2,7 @@ This was a web challenge with an estimated difficulty of "medium". Other than th
 
 Browsing to the web server reveals a page that reads "Welcome to my new FaaS! (Flask as a Service) Please enter the two chemicals you would like to combine: " and then two fields for Chemical One and Chemical Two. Using Burp Suite to intercept this POST request shows that the request and response look like this:
 
-<code>
+```http
 POST /science HTTP/1.1 <br />  
 Host: web3.tamuctf.com <br />  
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0 <br />  
@@ -30,8 +30,7 @@ Connection: close <br />
         \<h3>The result of combining a and b is:\</h3>\</br> <br />  
         \<iframe src="https://giphy.com/embed/AQ2tIhLp4cBa" width="468" height="480" frameBorder="0" class="giphy-embed" allowFullScreen>\</iframe>\</div> <br />  
         \</html>
-</code>
-
+```
 
 Interestingly, user-provided output is reflected in the HTTP response. Given the reference to Flask, this suggested to me the possiblity of a Server-Side Teplate Injection vulnerability. To test for this futher, I made use of <a href="https://portswigger.net/blog/server-side-template-injection">this excellent blog post </a>from Portswigger.
 
@@ -61,7 +60,7 @@ This provided a shell, which allowed me to view the directory contents and grab 
 <code>
 [+] Tplmap 0.5 <br />  
         
-    Automatic Server-Side Template Injection Detection and Exploitation Tool <br />  
+  Automatic Server-Side Template Injection Detection and Exploitation Tool
     
 
 [+] Testing if POST parameter 'chem1' is injectable <br />  
