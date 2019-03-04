@@ -15,11 +15,13 @@ openvpn wordpress.ovpn
 **Discovery**
 
 After connecting to the VPN environment, the network interface tap0 is created. First, I found the IP address I was given:
+
 <code>
 ifconfig tap0
 </code>
 
 This returned the address 172.30.0.14, with a subnet mask of 255.255.255.240. To discover other hosts on this subnet to attack, I started by running the following command to perform a ping sweep:
+
 <code>
 nmap -sn 172.30.0.0/28
 </code>
@@ -27,6 +29,7 @@ nmap -sn 172.30.0.0/28
 ![Alt text](/images/wordpress_1.png?raw=true "Subnet ping sweep")
 
 This discovered two hosts other than my own machine: 172.30.0.2 and 172.30.0.3. I ran a basic port scan (top 1000 ports) on each host with the following commands:
+
 <code>
 nmap 172.30.0.3
 </code>
@@ -64,6 +67,7 @@ nmap -A $target_ip -p-
 </code>
 
 For the sake of brevity, I won't include the output here. I didn't discover any new services with this command, and the version fingerprinting didn't reveal anything shockingly out-of-date. Lastly, I went ahead and ran a UDP scan (top 1000 ports) on each host in the background. This is time-consuming, so I wanted to push ahead with my main enumeration while the scan ran. I used the following command:
+
 <code>
 nmap -sU $target_ip
 </code>
@@ -75,6 +79,7 @@ This challenge is entitled “Wordpress”, so I decided to tackle the machine r
 ![Alt text](/images/wordpress_2.png?raw=true "WordPress site index")
 
 The challenge made mention of wpscan, which is a handy tool for fingerprinting WordPress versions, installed plugins and their versions, determining existing users, and more. I ran a basic scan with the following command:
+
 <code>
 wpscan --url "http://172.30.0.3/"
 </code>
@@ -154,9 +159,10 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 
 I had access as the www-data user, which is generally expected when exploiting a WordPress plugin or other web application. After gaining access to a machine running WordPress, it's a good idea to loot the wp-config file, as it contains a database password that might be re-used elsewhere.
 
-![Alt text](/images/wordpress_5?raw=true "/var/www/ contents")
+![Alt text](/images/wordpress_5.png?raw=true "/var/www/ contents")
 
 Upon checking /var/www, in addition to the wp-config file, there's also a non-standard file called note.txt. To view the contents of the file, I ran:
+
 <code>
 cat /var/www/note.txt
 </code>
@@ -166,6 +172,7 @@ Your ssh key was placed in /backup/id_rsa on the DB server.
 </blockquote>
 
 I then grabbed the contents of the wp-config file with:
+
 <code>
 cat /var/www/wp-config.php
 </code>
@@ -188,6 +195,7 @@ define('DB_HOST', '172.30.0.2');
 ```
 
 So the database username is “wordpress”, the password is “0NYa6PBH52y86C”, and the database host is not localhost, but 172.30.0.2. I had already discovered this host earlier in my enumeration; the only service it appeared to be running was MySQL. To attempt to log in to this database remotely, I ran the following command from my machine and provided the password I looted from the wp-config file:
+
 <code>
 mysql -u wordpress -p -h 172.30.0.2
 </code>
@@ -195,6 +203,7 @@ mysql -u wordpress -p -h 172.30.0.2
 ![Alt text](/images/wordpress_6.png?raw=true "Connecting to the MySQL server")
 
 An interesting feature of MySQL is the ability to load files and read their contents. Since the note.txt file discovered earlier made reference to a file on the DB server at /backup/id_rsa, I tried loading that file with this command:
+
 <code>
 SELECT LOAD_FILE("/backup/id_rsa");
 </code>
@@ -202,11 +211,13 @@ SELECT LOAD_FILE("/backup/id_rsa");
 ![Alt text](/images/wordpress_7.png?raw=true "File contents returned")
 
 This returned the contents of the file, which were a private SSH key. I then copied this text, saved it to my machine in a file entitled id_rsa (and cleaned up the formatting), and set its permissions:
+
 <code>
 chmod 600 id_rsa
 </code>
 
 Since the flag is supposed to be located at /root/flag.txt, and the 172.30.0.3 machine is running an SSH server, I tried to connect to it as root using the stolen SSH key:
+
 <code>
 ssh -i id_rsa root@172.30.0.3
 </code>
